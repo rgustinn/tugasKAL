@@ -15,4 +15,3 @@
 ![matriksQ](matriksQ.jpg)
 ![matriksR](matriksR.jpg)
 
-## TESSS
