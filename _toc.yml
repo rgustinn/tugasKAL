@@ -5,7 +5,11 @@ format: jb-book
 root: intro
 chapters:
 - file: markdown
-- file: testing/persamaan
-- file: tranformasi
+- file: notebooks
+- file: matriks
+- file: determinan
+- file: Transformasi
+- file: tugas_animasi
+- file: Decomposisi
 
 

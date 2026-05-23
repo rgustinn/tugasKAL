@@ -1,311 +1,434 @@
----
-jupytext:
-  formats: md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.11.5
-kernelspec:
-  display_name: Python 3
-  language: python
-  name: python3
----
-# INVERS
-## Diketahui:
-$A =
-\begin{bmatrix}
-1 & 1 & 1 & 1 \\
-2 & -1 & 1 & -1 \\
-1 & 2 & -1 & 1 \\
-3 & -1 & 2 & 1
-\end{bmatrix}
-\quad
-B =
-\begin{bmatrix}
-10 \\
--1 \\
-6 \\
-11
-\end{bmatrix}
-$
+# Sistem Persamaan Linier
+ 
+## A. Pengertian
 
-## Mencari Invers Matriks A
-### Langkah 1 Rumus Invers
-$A^{-1} = \frac{1}{\det(A)} \cdot \text{adj}(A)$
+**Sistem persamaan linear** adalah kumpulan dua atau lebih persamaan linear yang memiliki variabel yang sama dan harus dipenuhi secara bersamaan.
+Disebut linear karena setiap variabel berpangkat satu, tidak ada perkalian antar variabel, dan tidak ada variabel di dalam akar atau pangkat lebih dari satu.
 
-### Langkah 2 Hitung Determinan
-### Kita ekspansi baris pertama:
-det(A)=1C11​+1C12​+1C13​+1C14​
+**Contoh:**
 
-dengan
-
-Cij​=(−1)i+jMij​
-
-di mana Mij​ adalah minor.
-
-Jadi kita cari minor satu-satu dari baris pertama.
-
-## Cari determinan dari baris pertama
-det(A)=−3+9+11−4=13
-
-## Minor
-
-$
-\text{Minor } M_{11}
-$
-
-$
-M_{11}=
-\begin{vmatrix}
--1 & 1 & -1\
-2 & -1 & 1\
--1 & 2 & 1
-\end{vmatrix}
-$
+$$\begin{cases}
+2x + y = 5 \\
+x - y = 1
+\end{cases}$$
 
 
-# Menghitung Determinan Matriks dengan Ekspansi Baris
+Artinya kita mencari nilai 𝑥 dan 𝑦 yang membuat kedua persamaan benar sekaligus.
 
-$$
-\sum_{k=1}^{n} (-1)^{i+k} a_{ik} M_{ik}
-$$
+## B. Bentuk Umum Sistem Linear
 
-Dengan ( M_{ij} ) adalah minor dari matriks ( A ), dan:
+Bentuk umum sistem dengan 𝑚 persamaan dan 𝑛 variabel:
 
-$$
-M_{ij} = \det A_{ij}
-$$
+$$\begin{split}
+\begin{eqnarray*}
+a_{11}x_1 + a_{12}x_2 + \hspace{0.5cm} ... \hspace{0.5cm} + a_{1n}x_n & = & b_1 \\
+a_{21}x_1 + a_{22}x_2 + \hspace{0.5cm} ... \hspace{0.5cm} + a_{2n}x_n & = & b_2 \\
+\vdots \hspace{1.2cm} \vdots \hspace{3cm} \vdots \hspace{0.5cm}  & = & \vdots \\
+a_{m1}x_1 + a_{m2}x_2 + \hspace{0.5cm} ... \hspace{0.5cm} +  a_{mn}x_n & = & b_m \\
+\end{eqnarray*}
+\end{split}$$
 
-( A_{ij} ) adalah submatriks yang diperoleh dengan menghapus baris ke-( i ) dan kolom ke-( j ) dari matriks ( A ).
+Dengan keterangan:
+- 𝑥1,𝑥2,...,𝑥n adalah variabel,
+- a adalah koefisien,
+- b adalah konstanta.
 
----
+## C. Metode Penyelesaian
 
-## 1. Determinan Matriks 2x2
+**Metode Penyelesaian Sistem Persamaan Linear**
+
+**1. Metode Substitusi:**
+- Substitusi satu variabel ke persamaan lain.
+- Cocok untuk sistem sederhana.
+
+**2. Metode Eliminasi:**
+- Hilangkan satu variabel dengan operasi penjumlahan/pengurangan persamaan.
+
+**3. Metode Matriks (Eliminasi Gauss/Gauss-Jordan):**
+- Ubah sistem ke bentuk matriks eselon baris/reduksi.
+
+**4. Aturan Cramer:**
+- Gunakan determinan matriks untuk mencari solusi.
+
+**5. Metode Numerik (Iterasi):**
+- Misalnya, metode Jacobi atau Gauss-Seidel.
+
+## D. Eliminasi Gauss
+
+Eliminasi Gaussian adalah algoritme untuk menyelesaikan sistem persamaan linier dengan melakukan transformasi pada sistem agar lebih mudah dipecahkan. Dalam praktiknya, kita bekerja dengan matriks augmented yang berisi koefisien dan konstanta dari sistem persamaan.
+
+Tujuan eliminasi adalah mengubah sistem linier yang kompleks menjadi sistem yang berbentuk lebih sederhana (seperti segitiga atas), sehingga solusi variabel-variabelnya dapat ditemukan dengan mudah melalui substitusi balik.
+
+Ada tiga operasi baris yang digunakan dalam eliminasi, yang tidak mengubah solusi sistem:
+- Tukarkan posisi ke dua persamaan.
+- Kalikan persamaan dengan bilangan apa pun yang bukan nol.
+- Gantikan suatu persamaan dengan jumlah persamaan itu sendiri dan kelipatan peserta lainnya.
+
+**Langkah-Langkah Proses**
+
+1. Forward elimination
+Bagian awal proses di mana kita menghilangkan variabel di bawah pivot sehingga menghasilkan matriks segitiga atas.
+
+2. Pivoting
+Jika elemen di posisi pivot (titik utama eliminasi) bernilai nol atau kecil, kita mungkin harus menukar baris agar proses berjalan dengan benar.
+
+3. Back substitution
+Setelah bentuk segitiga atas terbentuk, kita dapat menyelesaikan sistem mulai dari baris paling bawah (variabel terakhir), lalu substitusi kembali ke atas untuk menemukan semua variabel.
+
+### Mentransformasi Sistem
 
 $$
-A=\begin{pmatrix}-7 & -5 \ 1 & 4\end{pmatrix}
+\begin{cases}
+x_1 - x_2 + x_3 = 3 \\
+2x_1 + x_2 + 8x_3 = 18 \\
+4x_1 + 2x_2 - 3x_3 = -2
+\end{cases}
 $$
 
-**Rumus:**
+==
 
 $$
-\det(A)=ad-bc
+\left[
+\begin{array}{ccc|c}
+1 & -1 & 1 & 3 \\
+2 & 1 & 8 & 18 \\
+4 & 2 & -3 & -2
+\end{array}
+\right]
 $$
 
-**Perhitungan:**
+*Setelah eliminasi Gauss (bentuk tangga)*
 
 $$
-\det(A)=(-7)(4)-(-5)(1)
+\begin{cases}
+x_1 - x_2 + x_3 = 3 \\
+x_2 + 2x_3 = 4 \\
+x_3 = 2
+\end{cases}
 $$
 
 $$
-=-28+5=-23
+\left[
+\begin{array}{ccc|c}
+1 & -1 & 1 & 3 \\
+0 & 1 & 2 & 4 \\
+0 & 0 & 1 & 2
+\end{array}
+\right]
 $$
 
----
+## E. Solusi Sistem Persamaan Linear
 
-## 2. Determinan Matriks 3x3
+### 1. Solusi Tunggal
+- Hanya ada satu pasangan nilai variabel yang memenuhi semua persamaan.
+- Sistem disebut konsisten independen.
+- Secara grafik (2 variabel): Dua garis berpotong di satu titik.
 
-$$
-A=\begin{pmatrix}
-0 & 2 & -3\
-1 & -2 & -1\
+**Contoh**
+
+$$\begin{aligned}
+-x + y &= 1 \\
+2x - y &= 0
+\end{aligned}$$
+
+**Matriks:**
+
+$$\left[
+\begin{array}{cc|c}
+-1 & 1 & 1 \\
+2 & -1 & 0
+\end{array}
+\right]$$
+
+    import numpy as np
+
+    # Membuat matriks
+    A = np.array([
+        [-1, 1, 1],
+        [2, -1, 0]
+    ])
+
+    # Menampilkan matriks
+    print("Matriks A:")
+    print(A)
+
+**Langkah OBE**
+
+Hilangkan salah satu variabel. 
+
+Gunakan: 
+
+$$2R1 = \begin{pmatrix}
+-2 & 2 \mid 2
+\end{pmatrix}$$
+
+Tambah ke baris kedua:
+
+$$\begin{pmatrix}
+2 & -1 \mid 0
+\end{pmatrix}
++
+\begin{pmatrix}
+-2 & 2 \mid 2
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 & 1 \mid 2
+\end{pmatrix}$$
+
+$$\left[
+\begin{array}{cc|c}
+-1 & 1 & 1 \\
+0 & 1 & 2
+\end{array}
+\right]$$
+
+Eliminasi variabel y pada baris pertama
+
+Gunakan:
+
+$$\begin{pmatrix}
+-1 & 1 \mid 1
+\end{pmatrix}
+-
+\begin{pmatrix}
+0 & 1 \mid 2
+\end{pmatrix}
+=
+\begin{pmatrix}
+-1 & 0 \mid -1
+\end{pmatrix}$$
+
+$$\left[
+\begin{array}{cc|c}
+-1 & 0 & -1 \\
+0 & 1 & 2
+\end{array}
+\right]$$
+
+Ubah koefisien utama jadi 1
+
+$$\begin{pmatrix}
+1 & 0 \mid 1
+\end{pmatrix}$$
+
+$$\left[
+\begin{array}{cc|c}
+1 & 0 & 1 \\
+0 & 1 & 2
+\end{array}
+\right]$$
+
+**Hasil Akhir**
+
+$$\boxed{x = 1 \quad , \quad y = 2}$$
+
+Jadi:
+
+$$(x,y) = (1,2)$$
+
+**Code Python**
+
+```python
+import numpy as np
+
+# Matriks awal (augmented matrix)
+A = np.array([
+[-1,  1,  1],
+[ 2, -1,  0]
+], dtype=float)
+
+print("Matriks Awal:")
+print(A)
+
+# Langkah 1: R2 = R2 + 2R1
+A[1] = A[1] + 2 * A[0]
+print("\nSetelah R2 = R2 + 2R1:")
+print(A)
+
+# Langkah 2: R1 = R1 - R2
+A[0] = A[0] - A[1]
+print("\nSetelah R1 = R1 - R2:")
+print(A)
+
+# Langkah 3: R1 = -1 * R1 (agar koefisien utama jadi 1)
+A[0] = -1 * A[0]
+print("\nSetelah R1 dikali -1:")
+print(A)
+
+# Hasil akhir
+x = A[0, 2]
+y = A[1, 2]
+
+print("\nHasil Akhir:")
+print("x =", int(x))
+print("y =", int(y))
+```
+
+### 2. Tidak Ada Solusi
+- Tidak ada nilai variabel yang memenuhi semua persamaan.
+- Sistem disebut inkonsisten
+- Secara grafik: Dua garis sejajar(tidak berpotongan).
+
+**Contoh**
+
+$$\begin{cases}
+x + y = 2 \\
+2x + 2y = 5
+\end{cases}$$
+
+**Matriks**
+
+$$\left[
+\begin{array}{cc|c}
+1 & 1 & 2 \\
+2 & 2 & 5
+\end{array}
+\right]$$
+
+```python
+    import numpy as np
+
+    # Membuat matriks augmented
+    A = np.array([
+        [1, 1, 2],
+        [0, 0, 1]
+    ])
+
+    print("Matriks Augmented:")
+    print(A)
+```
+
+**Langkah OBE**
+
+Hilangkan elemen di bawah pivot pertama.
+
+$$\left[
+\begin{array}{cc|c}
+1 & 1 & 2 \\
 0 & 0 & 1
-\end{pmatrix}
-$$
+\end{array}
+\right]$$
+```python
+    import numpy as np
 
-**Ekspansi baris pertama:**
+    # Membuat matriks augmented
+    A = np.array([
+        [1, 1, 2],
+        [0, 0, 1]
+    ])
 
-$$
-\det(A)=0 + (-1)^{1+2}(2)
-\begin{vmatrix}1 & -1\0 & 1\end{vmatrix}
+    print("Matriks Augmented:")
+    print(A)
+```
 
-* (-1)^{1+3}(-3)
-  \begin{vmatrix}1 & -2\0 & 0\end{vmatrix}
-  $$
+Baris kedua menyatakan:
 
-**Hitung minor:**
+$$0x + 0y = 1$$
 
-$$
-= (-1)(2)(1\cdot1-(-1)\cdot0) + (1)(-3)(0)
-$$
+$$0 = 1$$
 
-$$
-=-2
-$$
+**Kesimpulan**
 
----
+Karena muncul persamaan yang tidak mungkin benar (0 = 1), maka sistem tersebut disebut tidak memiliki solusi atau inkonsisten.
 
-## 3. Determinan Matriks 4x4
+### 3. Solusi Tak Terhingga
+- Memiliki banyak (tak terhingga) solusi.
+- Sistem disebut konsisten dependen.
+- Secara grafik: garis berimpit.
 
-$$
-A=
-\begin{pmatrix}
-1 & -3 & 1 & 1\
--3 & 1 & 1 & 1\
-1 & 1 & -3 & 1\
-1 & 1 & 1 & -3
-\end{pmatrix}
-$$
+**Contoh**
 
-Jumlah setiap baris:
+$$\begin{cases}
+x + y + z = 3 \\
+2x + 2y + 2z = 6 \\
+x + y + z = 3
+\end{cases}$$
 
-$$
-1-3+1+1=0
-$$
+**Matriks**
 
-Karena baris saling bergantung (linear dependent):
+$$\begin{bmatrix}
+1 & 1 & 1 & 3 \\
+2 & 2 & 2 & 6 \\
+1 & 1 & 1 & 3
+\end{bmatrix}$$
 
-$$
-\det(A)=0
-$$
+```python
+    import numpy as np
 
-**Sifat determinan:**
-Jika ada baris/kolom yang saling bergantung → determinan = 0
+    A = np.array([
+        [1, 1, 1, 3],
+        [2, 2, 2, 6],
+        [1, 1, 1, 3]
+    ])
 
----
+    print("Matriks A:")
+    print(A)
+```
 
-# Menggunakan Rumus Adjoin untuk Mencari Invers Matriks
+**Langkah OBE**
 
-$$
-(\mathrm{adj}, A)*{ij} = (-1)^{i+j} M*{ji}
-$$
+Baris 2 dikurangi 2 x Baris 1
 
-$$
-A^{-1} = \frac{1}{\det A} , \mathrm{adj}, A
-$$
+Baris 3 dikurangi Baris 1
 
----
+Hasil:
 
-## 4. Invers Matriks 2x2
+$$\begin{bmatrix}
+1 & 1 & 1 & 3 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{bmatrix}$$
 
-$$
-A=\begin{pmatrix}-7 & -5 \ 1 & 4\end{pmatrix}
-$$
+```python
+    import numpy as np
 
-**Langkah 1: Determinan**
+    # Membuat matriks
+    A = np.array([
+        [1, 1, 1, 3],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0]
+    ])
 
-$$
-\det(A)=-23
-$$
+    # Menampilkan matriks
+    print("Matriks A:")
+    print(A)
+```
 
-**Langkah 2: Minor**
+**Solusi Umum:**
 
-$$
-M_{11}=4,\quad M_{12}=1,\quad M_{21}=-5,\quad M_{22}=-7
-$$
+Misalkan:
 
-**Langkah 3: Kofaktor**
+$$y = s, \quad z = t$$
 
-$$
-C_{11}=4,\quad C_{12}=-1,\quad C_{21}=5,\quad C_{22}=-7
-$$
+Maka:
 
-**Langkah 4: Adjoin**
+$$x = 3 - s - t$$
 
-$$
-\text{adj}(A)=\begin{pmatrix}4 & 5 \ -1 & -7\end{pmatrix}
-$$
+**Hasil Akhir**
 
-**Langkah 5: Invers**
+$$(x,y,z) = (3 - s - t,\; s,\; t)$$
 
-$$
-A^{-1}=\frac{1}{-23}
-\begin{pmatrix}4 & 5 \ -1 & -7\end{pmatrix}
-$$
+$$s,t \in \mathbb{R}$$
 
-**Hasil:**
+Karena terdapat variabel bebas, maka SPL memiliki solusi tak terhingga atau banyak solusi.
 
-$$
-A^{-1} =
-\begin{pmatrix}
--\frac{4}{23} & -\frac{5}{23} \
-\frac{1}{23} & \frac{7}{23}
-\end{pmatrix}
-$$
+## F. Visualisasi Geometri menggunakan Geogebra
 
----
+### 1. Solusi Tunggal
 
-## 5. Invers Matriks 3x3
+Disebut Solusi Tunggal apabila terdapat tepat satu himpunan nilai variabel yang memenuhi semua persamaan secara bersamaan. Kondisi ini terjadi ketika setiap variabel dapat ditentukan secara pasti melalui proses penyelesaian, misalnya dengan substitusi, eliminasi, atau Operasi Baris Elementer (OBE). Secara aljabar, hal ini berarti sistem memiliki cukup persamaan yang saling independen untuk menentukan semua variabel. Secara geometri, pada sistem dua variabel, solusi tunggal terjadi ketika dua garis berpotongan di satu titik. Pada tiga variabel, hal ini terjadi ketika tiga bidang berpotongan tepat di satu titik.
 
-$$
-A = \begin{pmatrix}
-0 & 2 & -3 \
-1 & -2 & -1 \
-0 & 0 & 1
-\end{pmatrix}
-$$
+<iframe src="https://www.geogebra.org/calculator/dgzusbnp?embed" width="800" height="600" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
 
-**Langkah 1: Determinan**
+### 2. Tidak Ada Solusi
 
-$$
-\det(A) = -2
-$$
+Disebut Tidak Ada Solusi apabila terdapat banyak kemungkinan nilai variabel yang memenuhi semua persamaan. Ini biasanya terjadi karena ada persamaan yang sebenarnya merupakan kelipatan atau kombinasi dari persamaan lainnya, sehingga sistem tidak memberikan informasi baru yang cukup untuk menentukan semua variabel secara unik. Dalam proses OBE, kondisi ini ditandai dengan munculnya baris nol atau adanya variabel bebas. Secara geometri, pada dua variabel, kondisi ini terjadi ketika dua garis berimpit (menjadi garis yang sama). Pada tiga variabel, solusi dapat berupa sebuah garis atau bidang yang merupakan irisan bersama.
 
-**Langkah 2: Kofaktor**
+<iframe src="https://www.geogebra.org/calculator/gba5twg4?embed" width="800" height="600" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
 
-$$
-C = \begin{pmatrix}
--2 & -1 & 0 \
--2 & 0 & 0 \
--8 & -3 & -2
-\end{pmatrix}
-$$
+### 3. Solusi Tak Terhingga
 
-**Langkah 3: Adjoin**
+Disebut Solusi Tak terhingga apabila tidak ada satu pun nilai variabel yang dapat memenuhi semua persamaan secara bersamaan. Hal ini terjadi ketika terdapat pertentangan antar persamaan. Dalam penyelesaian menggunakan OBE, kondisi ini biasanya ditandai dengan munculnya pernyataan yang tidak mungkin benar, seperti 0 = 5. Secara geometri, pada dua variabel, keadaan ini digambarkan sebagai dua garis sejajar yang tidak pernah berpotongan. Pada tiga variabel, dapat berupa bidang-bidang yang tidak memiliki titik persekutuan.
 
-$$
-\text{adj}(A) =
-\begin{pmatrix}
--2 & -2 & -8 \
--1 & 0 & -3 \
-0 & 0 & -2
-\end{pmatrix}
-$$
-
-**Langkah 4: Invers**
-
-$$
-A^{-1} = \frac{1}{-2}
-\begin{pmatrix}
--2 & -2 & -8 \
--1 & 0 & -3 \
-0 & 0 & -2
-\end{pmatrix}
-$$
-
-$$
-A^{-1} =
-\begin{pmatrix}
-1 & 1 & 4 \
-\frac{1}{2} & 0 & \frac{3}{2} \
-0 & 0 & 1
-\end{pmatrix}
-$$
-
----
-
-## 6. Invers Matriks 4x4
-
-$$
-A=
-\begin{pmatrix}
-1 & -3 & 1 & 1\
--3 & 1 & 1 & 1\
-1 & 1 & -3 & 1\
-1 & 1 & 1 & -3
-\end{pmatrix}
-$$
-
-**Langkah 1: Determinan**
-
-$$
-\det(A)=0
-$$
-
-**Langkah 2: Kesimpulan**
-
-$$
-A^{-1} \text{ tidak ada (matriks singular)}
-$$
+<iframe src="https://www.geogebra.org/calculator/ghjnamqe?embed" width="800" height="600" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
