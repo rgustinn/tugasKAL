@@ -7,7 +7,7 @@ $$A = U \Sigma V^T$$
 
 ### Ilustrasi Dimensi
 
-$A_{m \times n} = U_{m \times m} \cdot \Sigma_{m \times n} \cdot V^T_{n \times n}$
+$$A_{m \times n} = U_{m \times m} \cdot \Sigma_{m \times n} \cdot V^T_{n \times n}$$
 
 Keterangan:
 - $U$ adalah matriks ortogonal berukuran $m \times m$ (yaitu, kolom dan barisnya adalah vektor ortonormal). Kolom-kolom $U$ disebut vektor singular kiri dari $A$.
