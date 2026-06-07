@@ -11,6 +11,12 @@ Keterangan:
 - $V$ adalah matriks ortogonal berukuran $n \times n$. Kolom-kolom $V$ disebut vektor singular kanan dari $A$.
 
 ## Algoritma SVD 
+
+### Matriks
+$A = \begin{bmatrix} 3 & 1 & 1 \\ -1 & 3 & 1 \end{bmatrix}$
+
 Langkah algoritma SVD:
 
 ## Langkah 1 Menghitung Vektor Singular Kiri
+- Hitung matriks $AA^T$ (berukuran m x m)
+$AA^T = \begin{bmatrix} 3 & 1 & 1 \\ -1 & 3 & 1 \end{bmatrix} \begin{bmatrix} 3 & -1 \\ 1 & 3 \\ 1 & 1 \end{bmatrix}$
