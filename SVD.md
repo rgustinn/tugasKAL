@@ -218,9 +218,6 @@ $$A^TA = \begin{bmatrix} 3 & -1 \\ 1 & 3 \\ 1 & 1 \end{bmatrix} \begin{bmatrix} 
 
   $$\begin{bmatrix} 10 & 0 & 2 \\ 0 & 10 & 4 \\ 2 & 4 & 2 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix} \implies \mathbf{v}_3 = \begin{bmatrix} 1 \\ 2 \\ -5 \end{bmatrix}$$
 
-
-
-```md
 ### 5. Normalisasi dan Pembentukan Matriks $V$
 
 $$
