@@ -346,37 +346,33 @@ $$
 \end{bmatrix}
 $$
 
+## Implementasi SVD dengan SageMath Cell
+
 <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+
 <script>
-sagecell.makeSagecell({inputLocation: '.sage'});
+sagecell.makeSagecell({
+    inputLocation: '.sage'
+});
 </script>
 
 <div class="sage">
-
+<script type="text/x-sage">
 import numpy as np
-
 A = np.array([[3, 1, 1], [-1, 3, 1]])
-
 U, S_vektor, VT = np.linalg.svd(A)
-
 S_matriks = np.zeros((2, 3))
 S_matriks[:2, :2] = np.diag(S_vektor)
-
 hasil = U @ S_matriks @ VT
-
-print("Matriks U")
+print('matriks U')
 print(U)
-
-print("\nMatriks S")
+print('\nmatriks S')
 print(S_matriks)
-
-print("\nMatriks VT")
+print('\nmatriks VT')
 print(VT)
-
-print("\nMatriks Awal")
+print('\nMatriks Awal:')
 print(A)
-
-print("\nHasil Rekonstruksi (U @ S @ VT)")
+print('\nHasil Rekonstruksi (U @ S @ VT):')
 print(hasil)
-
+</script>
 </div>
