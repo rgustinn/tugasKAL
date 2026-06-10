@@ -346,7 +346,6 @@ $$
 \end{bmatrix}
 $$
 
-
 <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
 <script>
 sagecell.makeSagecell({inputLocation: '.sage'});
@@ -354,19 +353,15 @@ sagecell.makeSagecell({inputLocation: '.sage'});
 
 <div class="sage">
 
-A = matrix([[3, 1, 1],
-            [-1, 3, 1]])
+A = matrix(RR, [
+    [3, 1, 1],
+    [-1, 3, 1]
+])
 
 print("Matriks A")
 show(A)
 
-print("AA^T")
-show(A*A.transpose())
-
-print("A^TA")
-show(A.transpose()*A)
-
-U,S,V = A.SVD()
+U, S, V = A.singular_value_decomposition()
 
 print("Matriks U")
 show(U)
