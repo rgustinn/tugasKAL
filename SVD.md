@@ -354,20 +354,29 @@ sagecell.makeSagecell({inputLocation: '.sage'});
 <div class="sage">
 
 import numpy as np
+
 A = np.array([[3, 1, 1], [-1, 3, 1]])
+
 U, S_vektor, VT = np.linalg.svd(A)
+
 S_matriks = np.zeros((2, 3))
 S_matriks[:2, :2] = np.diag(S_vektor)
+
 hasil = U @ S_matriks @ VT
-print('matriks U')
+
+print("Matriks U")
 print(U)
-print('\nmatriks S')
+
+print("\nMatriks S")
 print(S_matriks)
-print('\nmatriks VT')
+
+print("\nMatriks VT")
 print(VT)
-print('\nMatriks Awal:')
+
+print("\nMatriks Awal")
 print(A)
-print('\nHasil Rekonstruksi (U @ S @ VT):')
+
+print("\nHasil Rekonstruksi (U @ S @ VT)")
 print(hasil)
 
 </div>
