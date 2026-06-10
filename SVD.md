@@ -345,3 +345,40 @@ $$
 \dfrac{1}{\sqrt{30}} & \dfrac{2}{\sqrt{30}} & -\dfrac{5}{\sqrt{30}}
 \end{bmatrix}
 $$
+
+```html
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+<script>
+sagecell.makeSagecell({inputLocation: '.sage'});
+</script>
+
+<div class="sage">
+
+A = matrix([[3, 1, 1],
+            [-1, 3, 1]])
+
+print("Matriks A")
+show(A)
+
+print("AA^T")
+show(A*A.transpose())
+
+print("A^TA")
+show(A.transpose()*A)
+
+U,S,V = A.SVD()
+
+print("Matriks U")
+show(U)
+
+print("Matriks Sigma")
+show(S)
+
+print("Matriks V")
+show(V)
+
+print("Verifikasi A = U*S*V")
+show(U*S*V)
+
+</div>
+```
