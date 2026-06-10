@@ -345,3 +345,84 @@ $$
 \dfrac{1}{\sqrt{30}} & \dfrac{2}{\sqrt{30}} & -\dfrac{5}{\sqrt{30}}
 \end{bmatrix}
 $$
+
+##  SAGE CELL
+<script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+
+<script>
+sagecell.makeSagecell({
+    inputLocation: '.sage'
+});
+</script>
+
+<div class="sage">
+<script type="text/x-sage">
+import numpy as np
+
+# Matriks A
+A = np.array([
+    [3, 1, 1],
+    [-1, 3, 1]
+])
+
+print("Matriks A:")
+print(A)
+
+# AA^T
+AAT = A @ A.T
+print("\nAA^T:")
+print(AAT)
+
+# Eigenvalue dan Eigenvector AA^T
+eigenvalues_U, eigenvectors_U = np.linalg.eig(AAT)
+
+print("\nNilai Eigen AA^T:")
+print(eigenvalues_U)
+
+print("\nVektor Eigen AA^T:")
+print(eigenvectors_U)
+
+# A^T A
+ATA = A.T @ A
+
+print("\nA^T A:")
+print(ATA)
+
+# Eigenvalue dan Eigenvector A^T A
+eigenvalues_V, eigenvectors_V = np.linalg.eig(ATA)
+
+print("\nNilai Eigen A^T A:")
+print(eigenvalues_V)
+
+print("\nVektor Eigen A^T A:")
+print(eigenvectors_V)
+
+# SVD
+U, S, VT = np.linalg.svd(A)
+
+print("\n===== HASIL SVD =====")
+
+print("\nU =")
+print(U)
+
+print("\nNilai Singular (S) =")
+print(S)
+
+print("\nV^T =")
+print(VT)
+
+# Membentuk Sigma
+Sigma = np.zeros((2,3))
+Sigma[:2,:2] = np.diag(S)
+
+print("\nSigma =")
+print(Sigma)
+
+# Verifikasi
+A_rekonstruksi = U @ Sigma @ VT
+
+print("\nVerifikasi A = UΣV^T")
+print(A_rekonstruksi)
+
+</script>
+</div>
