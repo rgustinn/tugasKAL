@@ -346,7 +346,7 @@ $$
 \end{bmatrix}
 $$
 
-```html
+
 <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
 <script>
 sagecell.makeSagecell({inputLocation: '.sage'});
@@ -381,4 +381,3 @@ print("Verifikasi A = U*S*V")
 show(U*S*V)
 
 </div>
-```
