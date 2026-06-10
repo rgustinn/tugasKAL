@@ -353,26 +353,21 @@ sagecell.makeSagecell({inputLocation: '.sage'});
 
 <div class="sage">
 
-A = matrix(RR, [
-    [3, 1, 1],
-    [-1, 3, 1]
-])
-
-print("Matriks A")
-show(A)
-
-U, S, V = A.singular_value_decomposition()
-
-print("Matriks U")
-show(U)
-
-print("Matriks Sigma")
-show(S)
-
-print("Matriks V")
-show(V)
-
-print("Verifikasi A = U*S*V")
-show(U*S*V)
+import numpy as np
+A = np.array([[3, 1, 1], [-1, 3, 1]])
+U, S_vektor, VT = np.linalg.svd(A)
+S_matriks = np.zeros((2, 3))
+S_matriks[:2, :2] = np.diag(S_vektor)
+hasil = U @ S_matriks @ VT
+print('matriks U')
+print(U)
+print('\nmatriks S')
+print(S_matriks)
+print('\nmatriks VT')
+print(VT)
+print('\nMatriks Awal:')
+print(A)
+print('\nHasil Rekonstruksi (U @ S @ VT):')
+print(hasil)
 
 </div>
