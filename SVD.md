@@ -1,433 +1,350 @@
 # Singular Value Decomposition (SVD)
 
+
+
 ## Definisi Matematis
 
-Dekomposisi nilai singular (Singular Value Decomposition/SVD) dari matriks riil $A$ berukuran $m \times n$ adalah faktorisasi:
+Dekomposisi nilai singular dari matriks riil $A$ berukuran $m \times n$ adalah faktorisasi berbentuk:
 
-$$
-A = U \Sigma V^T
-$$
+
+
+$$A = U \Sigma V^T$$
+
+
 
 dengan:
 
-* **$U$** adalah matriks ortogonal berukuran $m \times m$.
-* **$\Sigma$** adalah matriks diagonal berukuran $m \times n$ yang memuat nilai-nilai singular.
-* **$V$** adalah matriks ortogonal berukuran $n \times n$.
+* **$U$** adalah matriks **ortogonal** berukuran $m \times m$ (yaitu, kolom dan barisnya adalah vektor ortonormal). Kolom-kolom $U$ disebut **vektor singular kiri** dari $A$.
 
-Nilai singular diperoleh dari:
+* **$\Sigma$** adalah matriks diagonal persegi panjang berukuran $m \times n$ dengan bilangan riil non-negatif pada diagonalnya. Entri diagonal $\sigma_i = \Sigma_{ii}$ dikenal sebagai **nilai singular** dari $A$ dan biasanya disusun dalam urutan menurun, yaitu $\sigma_1 \geq \sigma_2 \geq \dots \geq \sigma_n \geq 0$. Jumlah nilai singular yang tidak nol sama dengan rank dari $A$.
 
-$$
-\sigma_i=\sqrt{\lambda_i}
-$$
+* **$V$** adalah matriks ortogonal berukuran $n \times n$. Kolom-kolom $V$ disebut **vektor singular kanan** dari $A$.
 
-dengan $\lambda_i$ adalah nilai eigen dari matriks $A^TA$.
+
 
 ---
 
+
+
 ## Algoritma SVD
 
-### Langkah 1: Menghitung Matriks $AA^T$
+Berikut adalah langkah-langkah algoritma SVD:
 
-Hitung:
 
-$$
-AA^T
-$$
 
-Kemudian cari nilai eigen dan vektor eigennya.
+### Langkah 1: Menghitung Vektor Singular Kiri
+
+* Hitung matriks $AA^T$ (berukuran $m \times m$).
+
+* Cari **nilai-nilai eigen** dari $AA^T$.
+
+* **Rank(A)** = $k$ = banyaknya nilai eigen yang **tidak nol**.
+
+* Nilai eigen ini akan digunakan untuk mendapatkan vektor-vektor kiri.
+
+
 
 ### Langkah 2: Membentuk Matriks $U$
 
-Jika diperoleh vektor eigen:
+* Tentukan **vektor eigen** $\mathbf{u}_1, \mathbf{u}_2, \dots, \mathbf{u}_m$ yang berkorespondensi dengan nilai eigen dari $AA^T$.
 
-$$
-u_1,u_2,\ldots,u_m
-$$
+* **Normalisasi** setiap vektor eigen:
 
-Normalisasi:
+  $$\mathbf{u}_i = \frac{\mathbf{u}_i}{\|\mathbf{u}_i\|}$$
 
-$$
-\hat{u}_i=\frac{u_i}{|u_i|}
-$$
+  *(dibagi dengan panjang/norm vektor).*
 
-Kemudian susun sebagai kolom matriks:
+* Susun vektor-vektor ini sebagai kolom matriks $U$ (berukuran $m \times m$).
 
-$$
-U=
-\begin{bmatrix}
-\hat{u}_1 & \hat{u}_2 & \cdots & \hat{u}_m
-\end{bmatrix}
-$$
 
-### Langkah 3: Menghitung Matriks $A^TA$
 
-Hitung:
+### Langkah 3: Menghitung Vektor Singular Kanan dan Nilai Singular
 
-$$
-A^TA
-$$
+* Hitung matriks $A^TA$ (berukuran $n \times n$).
 
-Cari nilai eigen:
+* Cari **nilai-nilai eigen** dari $A^TA$.
 
-$$
-\lambda_1,\lambda_2,\ldots,\lambda_n
-$$
+* **Nilai singular** $\sigma_i$ adalah akar dari nilai eigen:
 
-Nilai singular:
+  $$\sigma_i = \sqrt{\lambda_i}$$
 
-$$
-\sigma_i=\sqrt{\lambda_i}
-$$
+  di mana $\lambda_i$ adalah nilai eigen dari $A^TA$.
+
+
 
 ### Langkah 4: Membentuk Matriks $V$
 
-Cari vektor eigen:
+* Tentukan **vektor eigen** $\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n$ dari $A^TA$.
+
+* **Normalisasi** setiap vektor eigen.
+
+* Susun sebagai kolom matriks $V$ (berukuran $n \times n$).
+
+* Transpose menjadi $V^T$.
+
+
+
+### Langkah 5: Membentuk Matriks $\Sigma$ (Sigma)
+
+* Buat matriks $\Sigma$ berukuran $m \times n$.
+
+* Elemen diagonal berisi **nilai singular** $\sigma_1, \sigma_2, \dots, \sigma_k$.
+
+* Urutkan dari besar ke kecil: $\sigma_1 \geq \sigma_2 \geq \dots \geq \sigma_k > 0$.
+
+* Elemen di luar diagonal $= 0$.
+
+
+
+### Langkah 6: Hasil Dekomposisi
+
+* Matriks $A$ dapat direkonstruksi sebagai:
+
+  $$A = U \Sigma V^T$$
+
+
+
+**Catatan Penting:**
+
+1. Nilai eigen $AA^T$ dan $A^TA$ adalah sama.
+
+2. Nilai singular selalu **non-negatif** dan **real**.
+
+3. $U$ dan $V$ adalah matriks ortogonal: $U^TU = I$ dan $V^TV = I$.
+
+
+
+---
+
+
+
+## Contoh Perhitungan SVD
+
+Diberikan matriks $A$ berukuran $2 \times 3$:
+
+
+
+$$A = \begin{bmatrix} 3 & 1 & 1 \\ -1 & 3 & 1 \end{bmatrix}$$
+
+
+
+Carilah SVD dari matriks di atas.
+
+
+
+### 1. Menghitung $AA^T$ (untuk vektor singular kiri)
+
+$$AA^T = \begin{bmatrix} 3 & 1 & 1 \\ -1 & 3 & 1 \end{bmatrix} \begin{bmatrix} 3 & -1 \\ 1 & 3 \\ 1 & 1 \end{bmatrix} = \begin{bmatrix} 11 & 1 \\ 1 & 11 \end{bmatrix}$$
+
+
+
+### 2. Mencari Nilai Eigen dari $AA^T$
+
+Persamaan karakteristik:
+
+$$\det(AA^T - \lambda I) = 0$$
+
+$$\det \begin{bmatrix} 11-\lambda & 1 \\ 1 & 11-\lambda \end{bmatrix} = 0$$
+
+$$(11-\lambda)^2 - 1 = 0$$
+
+$$\lambda^2 - 22\lambda + 120 = 0$$
+
+$$(\lambda - 12)(\lambda - 10) = 0$$
+
+
+
+Nilai eigen: $\lambda_1 = 12$ dan $\lambda_2 = 10$.  
+
+**Rank(A) = 2** karena ada 2 nilai eigen tidak nol.
+
+
+
+### 3. Menentukan Matriks $U$ (vektor eigen dari $AA^T$)
+
+Untuk mencari vektor eigen, selesaikan $(\lambda I - AA^T)\mathbf{x} = 0$.
+
+
+
+* **Untuk $\lambda_1 = 12$:**
+
+  $$\begin{bmatrix} 1 & -1 \\ -1 & 1 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix} \implies x_1 = x_2 \implies \mathbf{u}_1 = \begin{bmatrix} 1 \\ 1 \end{bmatrix}$$
+
+  Normalisasi: $\|\mathbf{u}_1\| = \sqrt{2} \implies \hat{\mathbf{u}}_1 = \begin{bmatrix} 1/\sqrt{2} \\ 1/\sqrt{2} \end{bmatrix}$
+
+
+
+* **Untuk $\lambda_2 = 10$:**
+
+  $$\begin{bmatrix} -1 & -1 \\ -1 & -1 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix} \implies x_1 = -x_2 \implies \mathbf{u}_2 = \begin{bmatrix} 1 \\ -1 \end{bmatrix}$$
+
+  Normalisasi: $\|\mathbf{u}_2\| = \sqrt{2} \implies \hat{\mathbf{u}}_2 = \begin{bmatrix} 1/\sqrt{2} \\ -1/\sqrt{2} \end{bmatrix}$
+
+
+
+* **Matriks $U$:**
+
+  $$U = \begin{bmatrix} 1/\sqrt{2} & 1/\sqrt{2} \\ 1/\sqrt{2} & -1/\sqrt{2} \end{bmatrix}$$
+
+
+
+### 4. Singular Kanan ($A^TA$)
+
+$$A^TA = \begin{bmatrix} 3 & -1 \\ 1 & 3 \\ 1 & 1 \end{bmatrix} \begin{bmatrix} 3 & 1 & 1 \\ -1 & 3 & 1 \end{bmatrix} = \begin{bmatrix} 10 & 0 & 2 \\ 0 & 10 & 4 \\ 2 & 4 & 2 \end{bmatrix}$$
+
+
+
+* **Nilai Eigen dari $A^TA$**: $\lambda_1 = 12, \lambda_2 = 10, \lambda_3 = 0$.
+
+* **Nilai Singular**:
+
+  $$\sigma_1 = \sqrt{12} = 2\sqrt{3} \approx 3.464$$
+
+  $$\sigma_2 = \sqrt{10} \approx 3.162$$
+
+
+
+#### Vektor-Vektor Eigen $\mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_3$:
+
+* **a. Untuk $\lambda_1 = 12$**:
+
+  $$\begin{bmatrix} -2 & 0 & 2 \\ 0 & -2 & 4 \\ 2 & 4 & -10 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix} \implies \mathbf{v}_1 = \begin{bmatrix} 1 \\ 2 \\ 1 \end{bmatrix}$$
+
+* **b. Untuk $\lambda_2 = 10$**:
+
+  $$\begin{bmatrix} 0 & 0 & 2 \\ 0 & 0 & 4 \\ 2 & 4 & -8 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix} \implies \mathbf{v}_2 = \begin{bmatrix} 2 \\ -1 \\ 0 \end{bmatrix}$$
+
+* **c. Untuk $\lambda_3 = 0$**:
+
+  $$\begin{bmatrix} 10 & 0 & 2 \\ 0 & 10 & 4 \\ 2 & 4 & 2 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix} \implies \mathbf{v}_3 = \begin{bmatrix} 1 \\ 2 \\ -5 \end{bmatrix}$$
+
+
+
+```md
+### 5. Normalisasi dan Pembentukan Matriks $V$
 
 $$
-v_1,v_2,\ldots,v_n
+\hat{\mathbf{v}}_1=
+\frac{1}{\sqrt6}
+\begin{bmatrix}
+1\\
+2\\
+1
+\end{bmatrix},
+\qquad
+\hat{\mathbf{v}}_2=
+\frac{1}{\sqrt5}
+\begin{bmatrix}
+2\\
+-1\\
+0
+\end{bmatrix},
+\qquad
+\hat{\mathbf{v}}_3=
+\frac{1}{\sqrt{30}}
+\begin{bmatrix}
+1\\
+2\\
+-5
+\end{bmatrix}
 $$
 
-Normalisasi:
-
-$$
-\hat{v}_i=\frac{v_i}{|v_i|}
-$$
-
-Susun:
+Matriks $V$ diperoleh dengan menyusun vektor-vektor eigen ternormalisasi sebagai kolom:
 
 $$
 V=
 \begin{bmatrix}
-\hat{v}_1 & \hat{v}_2 & \cdots & \hat{v}_n
-\end{bmatrix}
-$$
-
-### Langkah 5: Membentuk Matriks $\Sigma$
-
-Susun nilai singular pada diagonal utama:
-
-$$
-\Sigma=
-\begin{bmatrix}
-\sigma_1 & 0 & \cdots & 0\
-0 & \sigma_2 & \cdots & 0\
-\vdots & \vdots & \ddots & \vdots\
-0 & 0 & \cdots & \sigma_r
-\end{bmatrix}
-$$
-
-dengan:
-
-$$
-\sigma_1 \ge \sigma_2 \ge \cdots \ge \sigma_r > 0
-$$
-
-### Langkah 6: Hasil Dekomposisi
-
-$$
-A = U\Sigma V^T
-$$
-
----
-
-# Contoh Perhitungan SVD
-
-Diberikan matriks:
-
-$$
-A=
-\begin{bmatrix}
-3 & 1 & 1\
--1 & 3 & 1
-\end{bmatrix}
-$$
-
-## 1. Menghitung $AA^T$
-
-$$
-AA^T=
-\begin{bmatrix}
-3 & 1 & 1\
--1 & 3 & 1
-\end{bmatrix}
-\begin{bmatrix}
-3 & -1\
-1 & 3\
-1 & 1
-\end{bmatrix}
-=============
-
-\begin{bmatrix}
-11 & 1\
-1 & 11
-\end{bmatrix}
-$$
-
----
-
-## 2. Menentukan Nilai Eigen $AA^T$
-
-Persamaan karakteristik:
-
-$$
-\det(AA^T-\lambda I)=0
-$$
-
-$$
-\det
-\begin{bmatrix}
-11-\lambda & 1\
-1 & 11-\lambda
-\end{bmatrix}
-=0
-$$
-
-$$
-(11-\lambda)^2-1=0
-$$
-
-$$
-\lambda^2-22\lambda+120=0
-$$
-
-$$
-(\lambda-12)(\lambda-10)=0
-$$
-
-Sehingga diperoleh:
-
-$$
-\lambda_1=12
-$$
-
-$$
-\lambda_2=10
-$$
-
-Karena terdapat dua nilai eigen tidak nol:
-
-$$
-\text{rank}(A)=2
-$$
-
----
-
-## 3. Menentukan Matriks $U$
-
-### Untuk $\lambda_1=12$
-
-$$
-u_1=
-\begin{bmatrix}
-1\
-1
-\end{bmatrix}
-$$
-
-Normalisasi:
-
-$$
-\hat{u}_1=
-\frac{1}{\sqrt2}
-\begin{bmatrix}
-1\
-1
-\end{bmatrix}
-$$
-
-### Untuk $\lambda_2=10$
-
-$$
-u_2=
-\begin{bmatrix}
-1\
--1
-\end{bmatrix}
-$$
-
-Normalisasi:
-
-$$
-\hat{u}_2=
-\frac{1}{\sqrt2}
-\begin{bmatrix}
-1\
--1
-\end{bmatrix}
-$$
-
-Maka:
-
-$$
-U=
-\begin{bmatrix}
-\dfrac1{\sqrt2} & \dfrac1{\sqrt2}\
-\dfrac1{\sqrt2} & -\dfrac1{\sqrt2}
-\end{bmatrix}
-$$
-
----
-
-## 4. Menghitung $A^TA$
-
-$$
-A^TA=
-\begin{bmatrix}
-10 & 0 & 2\
-0 & 10 & 4\
-2 & 4 & 2
-\end{bmatrix}
-$$
-
-Nilai eigennya:
-
-$$
-\lambda_1=12,\qquad
-\lambda_2=10,\qquad
-\lambda_3=0
-$$
-
----
-
-## 5. Menghitung Nilai Singular
-
-$$
-\sigma_1=\sqrt{12}=2\sqrt3
-$$
-
-$$
-\sigma_2=\sqrt{10}
-$$
-
----
-
-## 6. Menentukan Matriks $V$
-
-### Untuk $\lambda_1=12$
-
-$$
-v_1=
-\begin{bmatrix}
-1\
-2\
-1
-\end{bmatrix}
-$$
-
-$$
-\hat v_1=
-\frac1{\sqrt6}
-\begin{bmatrix}
-1\
-2\
-1
-\end{bmatrix}
-$$
-
-### Untuk $\lambda_2=10$
-
-$$
-v_2=
-\begin{bmatrix}
-2\
--1\
-0
-\end{bmatrix}
-$$
-
-$$
-\hat v_2=
-\frac1{\sqrt5}
-\begin{bmatrix}
-2\
--1\
-0
-\end{bmatrix}
-$$
-
-### Untuk $\lambda_3=0$
-
-$$
-v_3=
-\begin{bmatrix}
-1\
-2\
--5
-\end{bmatrix}
-$$
-
-$$
-\hat v_3=
-\frac1{\sqrt{30}}
-\begin{bmatrix}
-1\
-2\
--5
+\dfrac{1}{\sqrt6} & \dfrac{2}{\sqrt5} & \dfrac{1}{\sqrt{30}}\\
+\dfrac{2}{\sqrt6} & -\dfrac{1}{\sqrt5} & \dfrac{2}{\sqrt{30}}\\
+\dfrac{1}{\sqrt6} & 0 & -\dfrac{5}{\sqrt{30}}
 \end{bmatrix}
 $$
 
 Sehingga:
 
 $$
-V=
-\begin{bmatrix}
-\dfrac1{\sqrt6} & \dfrac2{\sqrt5} & \dfrac1{\sqrt{30}}\
-\dfrac2{\sqrt6} & -\dfrac1{\sqrt5} & \dfrac2{\sqrt{30}}\
-\dfrac1{\sqrt6} & 0 & -\dfrac5{\sqrt{30}}
-\end{bmatrix}
-$$
-
-dan
-
-$$
 V^T=
 \begin{bmatrix}
-\dfrac1{\sqrt6} & \dfrac2{\sqrt6} & \dfrac1{\sqrt6}\
-\dfrac2{\sqrt5} & -\dfrac1{\sqrt5} & 0\
-\dfrac1{\sqrt{30}} & \dfrac2{\sqrt{30}} & -\dfrac5{\sqrt{30}}
+\dfrac{1}{\sqrt6} & \dfrac{2}{\sqrt6} & \dfrac{1}{\sqrt6}\\
+\dfrac{2}{\sqrt5} & -\dfrac{1}{\sqrt5} & 0\\
+\dfrac{1}{\sqrt{30}} & \dfrac{2}{\sqrt{30}} & -\dfrac{5}{\sqrt{30}}
 \end{bmatrix}
 $$
 
----
-
-## 7. Matriks $\Sigma$
+### 6. Membentuk Matriks $\Sigma$
 
 Karena ukuran matriks $A$ adalah $2 \times 3$, maka:
 
 $$
 \Sigma=
 \begin{bmatrix}
-2\sqrt3 & 0 & 0\
+2\sqrt3 & 0 & 0\\
 0 & \sqrt{10} & 0
 \end{bmatrix}
 $$
 
----
+Nilai singular:
 
-## 8. Hasil Akhir SVD
+$$
+\sigma_1=\sqrt{12}=2\sqrt3 \approx 3.464
+$$
+
+$$
+\sigma_2=\sqrt{10}\approx 3.162
+$$
+
+### 7. Hasil Akhir SVD
 
 $$
 A=U\Sigma V^T
 $$
 
+dengan
+
+$$
+U=
+\begin{bmatrix}
+\dfrac{1}{\sqrt2} & \dfrac{1}{\sqrt2}\\
+\dfrac{1}{\sqrt2} & -\dfrac{1}{\sqrt2}
+\end{bmatrix}
+$$
+
+$$
+\Sigma=
+\begin{bmatrix}
+2\sqrt3 & 0 & 0\\
+0 & \sqrt{10} & 0
+\end{bmatrix}
+$$
+
+$$
+V^T=
+\begin{bmatrix}
+\dfrac{1}{\sqrt6} & \dfrac{2}{\sqrt6} & \dfrac{1}{\sqrt6}\\
+\dfrac{2}{\sqrt5} & -\dfrac{1}{\sqrt5} & 0\\
+\dfrac{1}{\sqrt{30}} & \dfrac{2}{\sqrt{30}} & -\dfrac{5}{\sqrt{30}}
+\end{bmatrix}
+$$
+
+Sehingga:
+
 $$
 \begin{bmatrix}
-3 & 1 & 1\
+3 & 1 & 1\\
 -1 & 3 & 1
 \end{bmatrix}
-=============
-
+=
 \begin{bmatrix}
-\dfrac1{\sqrt2} & \dfrac1{\sqrt2}\
-\dfrac1{\sqrt2} & -\dfrac1{\sqrt2}
+\dfrac{1}{\sqrt2} & \dfrac{1}{\sqrt2}\\
+\dfrac{1}{\sqrt2} & -\dfrac{1}{\sqrt2}
 \end{bmatrix}
 \begin{bmatrix}
-2\sqrt3 & 0 & 0\
+2\sqrt3 & 0 & 0\\
 0 & \sqrt{10} & 0
 \end{bmatrix}
 \begin{bmatrix}
-\dfrac1{\sqrt6} & \dfrac2{\sqrt6} & \dfrac1{\sqrt6}\
-\dfrac2{\sqrt5} & -\dfrac1{\sqrt5} & 0\
-\dfrac1{\sqrt{30}} & \dfrac2{\sqrt{30}} & -\dfrac5{\sqrt{30}}
+\dfrac{1}{\sqrt6} & \dfrac{2}{\sqrt6} & \dfrac{1}{\sqrt6}\\
+\dfrac{2}{\sqrt5} & -\dfrac{1}{\sqrt5} & 0\\
+\dfrac{1}{\sqrt{30}} & \dfrac{2}{\sqrt{30}} & -\dfrac{5}{\sqrt{30}}
 \end{bmatrix}
 $$
