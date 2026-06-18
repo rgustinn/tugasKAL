@@ -131,6 +131,4 @@ $
 ---
 
 ## Kesimpulan
-$
 A = QR
-$
