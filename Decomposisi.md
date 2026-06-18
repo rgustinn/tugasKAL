@@ -1,4 +1,4 @@
-# Tugas Dekomposisi QR Menggunakan Metode Gram-Schmidt
+# Tugas Dekomposisi QR 
 
 Diberikan matriks:
 
@@ -12,7 +12,7 @@ A=
 \end{bmatrix}
 $$
 
-Kolom-kolom matriks \(A\) adalah:
+Kolom-kolom matriks $(A)$$ adalah:
 
 $$
 a_1=
@@ -50,7 +50,7 @@ $$
 
 ---
 
-## Langkah 1: Menentukan $\(q_1\)$
+## Langkah 1: Menentukan $(q_1)$
 
 Gunakan rumus:
 $
@@ -75,26 +75,26 @@ $
 
 ---
 
-## Langkah 2: Menentukan &\(q_2\)$
+## Langkah 2: Menentukan $(q_2)$
 
-### Menghitung &\(a_2 \cdot q_1\)&
+### Menghitung $(a_2 \cdot q_1)&
 $
 a_2 \cdot q_1 = \frac{1}{\sqrt{15}}(12+5+2+2) = \frac{21}{\sqrt{15}}
 $
 
-### Menghitung $\(v_2\)$
+### Menghitung $(v_2)$
 $
 v_2 = a_2 - (a_2 \cdot q_1)q_1 = \begin{bmatrix} 4 \\ 5 \\ 1 \\ 2 \end{bmatrix} - \begin{bmatrix} 21/5 \\ 7/5 \\ 14/5 \\ 7/5 \end{bmatrix} = \begin{bmatrix} -1/5 \\ 18/5 \\ -9/5 \\ 3/5 \end{bmatrix}
 $
 
-### Norma $\(v_2\)$
+### Norma $(v_2)$
 $
 \|v_2\| = \frac{\sqrt{415}}{5} \implies q_2 = \frac{1}{\sqrt{415}} \begin{bmatrix} -1 \\ 18 \\ -9 \\ 3 \end{bmatrix}
 $
 
 ---
 
-## Langkah 3: Menentukan $\(q_3\)$
+## Langkah 3: Menentukan $(q_3)$
 
 $
 v_3 = a_3 - (a_3 \cdot q_1)q_1 - (a_3 \cdot q_2)q_2 = \begin{bmatrix} -129/83 \\ 81/83 \\ 167/83 \\ -28/83 \end{bmatrix}
@@ -107,7 +107,7 @@ $
 
 ---
 
-## Matriks $\(Q\)$ dan $\(R\)$
+## Matriks (Q)$ dan (R)$
 
 $
 Q=
