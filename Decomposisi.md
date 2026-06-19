@@ -76,105 +76,26 @@ Maka:
 
 $$q_3 = \frac{v_3}{\|v_3\|} = \begin{bmatrix} 129/(25\sqrt{83}) \\ 81/(25\sqrt{83}) \\ 167/(25\sqrt{83}) \\ -28/(25\sqrt{83}) \end{bmatrix}$$
 
-## Membentuk Matriks $Q$
+### Membentuk Matriks $Q$
+$$Q = [q_1 \ q_2 \ q_3]$$
+$$Q = \begin{bmatrix}
+\frac{3}{\sqrt{15}} & -\frac{1}{\sqrt{415}} & -\frac{129}{25\sqrt{83}} \\
+\frac{1}{\sqrt{15}} & \frac{18}{\sqrt{415}} & \frac{81}{25\sqrt{83}} \\
+\frac{2}{\sqrt{15}} & -\frac{9}{\sqrt{415}} & \frac{167}{25\sqrt{83}} \\
+\frac{1}{\sqrt{15}} & \frac{3}{\sqrt{415}} & -\frac{28}{25\sqrt{83}}
+\end{bmatrix}$$
 
-$$
-Q=[q_1\ q_2\ q_3]
-$$
-
-$$
-Q=
-\begin{bmatrix}
-\frac3{\sqrt{15}} &
--\frac1{\sqrt{415}} &
--\frac{129}{25\sqrt{83}}
-\[6pt]
-\frac1{\sqrt{15}} &
-\frac{18}{\sqrt{415}} &
-\frac{81}{25\sqrt{83}}
-\[6pt]
-\frac2{\sqrt{15}} &
--\frac9{\sqrt{415}} &
-\frac{167}{25\sqrt{83}}
-\[6pt]
-\frac1{\sqrt{15}} &
-\frac3{\sqrt{415}} &
--\frac{28}{25\sqrt{83}}
-\end{bmatrix}
-$$
-
-## Membentuk Matriks $R$
-
-$$
-R=
-\begin{bmatrix}
-a_1\cdot q_1 & a_2\cdot q_1 & a_3\cdot q_1\
-0 & a_2\cdot q_2 & a_3\cdot q_2\
+### Membentuk Matriks $R$
+$$R = \begin{bmatrix}
+a_1\cdot q_1 & a_2\cdot q_1 & a_3\cdot q_1 \\
+0 & a_2\cdot q_2 & a_3\cdot q_2 \\
 0 & 0 & a_3\cdot q_3
-\end{bmatrix}
-$$
+\end{bmatrix}$$
+$$R = \begin{bmatrix}
+\sqrt{15} & \frac{21}{\sqrt{15}} & \frac{18}{\sqrt{15}} \\
+0 & \frac{\sqrt{415}}{5} & \frac{19}{\sqrt{415}} \\
+0 & 0 & \frac{25}{\sqrt{83}}
+\end{bmatrix}$$
 
-$$
-R=
-\begin{bmatrix}
-\sqrt{15} &
-\frac{21}{\sqrt{15}} &
-\frac{18}{\sqrt{15}}
-\[6pt]
-0 &
-\frac{\sqrt{415}}5 &
-\frac{19}{\sqrt{415}}
-\[6pt]
-0 &
-0 &
-\frac{25}{\sqrt{83}}
-\end{bmatrix}
-$$
-
-## Hasil Akhir
-
-$$
-\boxed{A=QR}
-$$
-
-dengan
-
-$$
-Q=
-\begin{bmatrix}
-\frac3{\sqrt{15}} &
--\frac1{\sqrt{415}} &
--\frac{129}{25\sqrt{83}}
-\[6pt]
-\frac1{\sqrt{15}} &
-\frac{18}{\sqrt{415}} &
-\frac{81}{25\sqrt{83}}
-\[6pt]
-\frac2{\sqrt{15}} &
--\frac9{\sqrt{415}} &
-\frac{167}{25\sqrt{83}}
-\[6pt]
-\frac1{\sqrt{15}} &
-\frac3{\sqrt{415}} &
--\frac{28}{25\sqrt{83}}
-\end{bmatrix}
-$$
-
-dan
-
-$$
-R=
-\begin{bmatrix}
-\sqrt{15} &
-\frac{21}{\sqrt{15}} &
-\frac{18}{\sqrt{15}}
-\[6pt]
-0 &
-\frac{\sqrt{415}}5 &
-\frac{19}{\sqrt{415}}
-\[6pt]
-0 &
-0 &
-\frac{25}{\sqrt{83}}
-\end{bmatrix}
-$$
+### Hasil Akhir
+$$\boxed{A = QR}$$
