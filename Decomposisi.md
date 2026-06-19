@@ -1,4 +1,4 @@
-# Dekomposisi QR Matriks A dengan Metode Gram-Schmidt
+# Dekomposisi QR Matriks 
 
 Diberikan matriks $A$ dengan vektor kolom $a_1, a_2, a_3,$ dan $a_4$:
 
